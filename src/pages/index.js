@@ -14,7 +14,17 @@ class BlogIndex extends React.Component {
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="Home page" />
-        {posts.map(({ node }) => {
+        <h3
+          style={{
+            marginBottom: rhythm(1 / 4),
+          }}
+        >
+          <Link style={{ boxShadow: `none` }} to={'/ckb'}>
+            CKB private key and address generator
+          </Link>
+        </h3>
+
+        {/* {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
             <div key={node.fields.slug}>
@@ -35,7 +45,7 @@ class BlogIndex extends React.Component {
               />
             </div>
           )
-        })}
+        })} */}
       </Layout>
     )
   }
