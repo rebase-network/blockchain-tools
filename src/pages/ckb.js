@@ -8,25 +8,8 @@ import { rhythm } from "../utils/typography"
 import Core from '@nervosnetwork/ckb-sdk-core'
 import Address from '@nervosnetwork/ckb-sdk-address'
 import { ec as EC } from 'elliptic'
-import { nodejs, browser } from '../utils/node-or-browser'
-console.log(Core, '\n=======core')
-console.log('\n=======000000')
-console.log(Address, '\n=======address')
-console.log(EC, '\n=======ec')
-
-// const EC = require('elliptic').ec
-// const Core = require('@nervosnetwork/ckb-sdk-core').default
-// const Address = require('@nervosnetwork/ckb-sdk-address').default
-
-
-console.log('nodejs, browser: ', nodejs, browser)
 
 class BlogIndex extends React.Component {
-  // state = {
-  //   privateKey: undefined,
-  //   address: undefined,
-  //   script: undefined,
-  // }
   componentDidMount() {
     this.bootstrap()
   }
