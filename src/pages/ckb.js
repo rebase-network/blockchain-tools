@@ -9,25 +9,35 @@ import Core from '@nervosnetwork/ckb-sdk-core'
 import Address from '@nervosnetwork/ckb-sdk-address'
 import { ec as EC } from 'elliptic'
 
+const ec = new EC('secp256k1')
+
+// const privateKey = ec.genKeyPair()
+
+// const address = new Address(privateKey, { prefix: 'ckt' }) // the ckt is the signal for testnet
+
 class BlogIndex extends React.Component {
   componentDidMount() {
-    this.bootstrap()
+    // this.bootstrap()
+    this.genAddress()
   }
 
-  bootstrap = async() => {
-    const ec = new EC('secp256k1')
-
+  genAddress() {
     const privateKey = ec.genKeyPair()
-
     const address = new Address(privateKey, { prefix: 'ckt' }) // the ckt is the signal for testnet
 
     console.log('privateKey: ', '0x'+address.getPrivateKey());
     console.log('address: ', address.value);
+
     this.setState({ privateKey: '0x'+address.getPrivateKey(), address: address.value })
-      /**
-       * Generate script code for mining
-       * block_assembler needs `code_hash` and `args` field
-       */
+
+  }
+
+  bootstrap = async() => {
+    const { privateKey } = this.state
+    /**
+     * Generate script code for mining
+     * block_assembler needs `code_hash` and `args` field
+     */
 
     // https://github.com/nervosnetwork/ckb-sdk-js/blob/develop/packages/ckb-sdk-core/examples/sendTransaction.js#L10-L16
 
@@ -81,8 +91,9 @@ class BlogIndex extends React.Component {
     const { data } = this.props
     const siteTitle = data.site.siteMetadata.title
     // const posts = data.allMarkdownRemark.edges
-    const { privateKey, address, script } = this.state
-    console.log('======\n this.state: ', this.state)
+    // const { script } = this.state
+    const { privateKey, address } = this.state
+    // console.log('======\n this.state: ', this.state)
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
