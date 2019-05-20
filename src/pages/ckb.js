@@ -96,7 +96,7 @@ class BlogIndex extends React.Component {
         </h3>
         <div><strong>privateKey</strong>: {privateKey}</div>
         <div><strong>address</strong>: {address}</div>
-        <h3
+        {/* <h3
           style={{
             marginBottom: rhythm(1),
           }}
@@ -104,8 +104,7 @@ class BlogIndex extends React.Component {
           For miner
         </h3>
         <div><strong>codeHash</strong>: {script && script.codeHash}</div>
-        <div><strong>args</strong>: {script && script.args}</div>
-        <div></div>
+        <div><strong>args</strong>: {script && script.args}</div> */}
       </Layout>
     )
   }
