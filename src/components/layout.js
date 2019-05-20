@@ -1,9 +1,11 @@
 import React from "react"
 import { Link } from "gatsby"
-import Image from "gatsby-image"
+// import Image from "gatsby-image"
 
 import { rhythm, scale } from "../utils/typography"
 import Bio from "./bio"
+
+import './layout.css'
 
 class Layout extends React.Component {
   render() {
@@ -63,8 +65,8 @@ class Layout extends React.Component {
         }}
       >
         <header>{header}</header>
-        <main>{children}</main>
-        <footer>
+        <main className="content">{children}</main>
+        <footer className="footer">
           © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://github.com/rebase-network">Rebase</a>

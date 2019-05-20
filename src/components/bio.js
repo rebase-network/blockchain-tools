@@ -16,7 +16,7 @@ function Bio() {
     <StaticQuery
       query={bioQuery}
       render={data => {
-        const { author, social } = data.site.siteMetadata
+        const { author } = data.site.siteMetadata
         return (
           <div>
             {/* <div
@@ -40,7 +40,6 @@ function Bio() {
             </div> */}
             <div
               style={{
-                textAlign: `center`,
                 marginBottom: rhythm(2.5),
               }}
             >
@@ -48,7 +47,7 @@ function Bio() {
                 fixed={data.qr.childImageSharp.fixed}
                 alt={author}
                 style={{
-                  marginRight: rhythm(1 / 2),
+                  marginTop: rhythm(1 / 2),
                   marginBottom: 0,
                   minWidth: 50,
                 }}
