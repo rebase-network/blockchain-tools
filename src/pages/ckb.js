@@ -105,6 +105,15 @@ class BlogIndex extends React.Component {
         >
           Your CKB private key and address
         </h3>
+        <p
+          style={{
+            padding: 10,
+            borderRadius: 3,
+            border: '2px solid #ff5d5d'
+          }}
+        >
+          This ONLY uses for CKB TESTNET, and is NOT a recommended way of creating a wallet. Please ask experienced crypto users to help you generate them offline.(此工具仅用于CKB测试网，仅做测试用途。在线生成地址有风险，请咨询有经验的人帮你离线生成。)
+        </p>
         <div><strong>privateKey</strong>: {privateKey}</div>
         <div><strong>address</strong>: {address}</div>
         {/* <h3
