@@ -16,20 +16,26 @@ const ec = new EC('secp256k1')
 // const address = new Address(privateKey, { prefix: 'ckt' }) // the ckt is the signal for testnet
 
 class BlogIndex extends React.Component {
+  state = {
+    privateKey: null,
+    address: null,
+  }
   componentDidMount() {
     // this.bootstrap()
-    this.genAddress()
   }
 
   genAddress() {
     const privateKey = ec.genKeyPair()
     const address = new Address(privateKey, { prefix: 'ckt' }) // the ckt is the signal for testnet
 
-    console.log('privateKey: ', '0x'+address.getPrivateKey());
-    console.log('address: ', address.value);
+    // console.log('privateKey: ', '0x'+address.getPrivateKey());
+    // console.log('address: ', address.value);
 
     this.setState({ privateKey: '0x'+address.getPrivateKey(), address: address.value })
+  }
 
+  onGenAddress = () => {
+    this.genAddress()
   }
 
   bootstrap = async() => {
@@ -112,8 +118,9 @@ class BlogIndex extends React.Component {
             border: '2px solid #ff5d5d'
           }}
         >
-          This ONLY uses for CKB TESTNET, and is NOT a recommended way of creating a wallet. Please ask experienced crypto users to help you generate them offline.(此工具仅用于CKB测试网，仅做测试用途。在线生成地址有风险，请咨询有经验的人帮你离线生成。)
+          This ONLY uses for CKB TESTNET, and is NOT a recommended way of creating a wallet. Please ask experienced crypto users to help you generate them. This tool support offline generating and you can turn off your internet connection before click Generate button.(此工具仅用于CKB测试网，仅做测试用途。在线生成地址有风险，请咨询有经验的人帮你生成。本工具支持离线生成，你可以先断网再点击Generate按钮。)
         </p>
+        <button onClick={this.onGenAddress}>Generate</button>
         <div><strong>privateKey</strong>: {privateKey}</div>
         <div><strong>address</strong>: {address}</div>
         {/* <h3
