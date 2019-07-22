@@ -69,7 +69,7 @@ class Layout extends React.Component {
         <footer className="footer">
           © {new Date().getFullYear()}, Built with
           {` `}
-          <a href="https://github.com/rebase-network">Rebase</a>
+          <a href="https://github.com/rebase-network/blockchain-tools" target="_blank">Rebase</a>
           <Bio />
         </footer>
       </div>

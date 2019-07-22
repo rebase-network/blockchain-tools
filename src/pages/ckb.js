@@ -64,10 +64,10 @@ class BlogIndex extends React.Component {
         <div><strong>私钥(privateKey)</strong>: {privateKey}</div>
         <br/>
 
-        <div><strong>主网地址(mainnetaddress)</strong>: {mainnetaddress}</div>
+        <div><strong>主网地址(mainnetAddress)</strong>: {mainnetaddress}</div>
         <br/>
 
-        <div><strong>测试网地址(testnetaddress)</strong>: {testnetaddress}</div>
+        <div><strong>测试网地址(testnetAddress)</strong>: {testnetaddress}</div>
         <br/>
       </Layout>
     )
