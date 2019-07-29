@@ -18,7 +18,8 @@ class BlogIndex extends React.Component {
   }
 
   onGenAddress = () => {
-    const privateKey = ec.genKeyPair()
+    const privateKey = ec.genKeyPair().priv
+    // privateKey need to be BN
     const mainaddr = new Address(privateKey, { prefix: 'ckb' })
     const testaddr = new Address(privateKey, { prefix: 'ckt' }) // the ckt is the signal for testnet
 
