@@ -16,20 +16,13 @@ class BlogIndex extends React.Component {
     mainnetaddress: null,
     testnetaddress: null,
   }
-  componentDidMount() {
-    // this.bootstrap()
-  }
 
-  genAddress() {
+  onGenAddress = () => {
     const privateKey = ec.genKeyPair()
     const mainaddr = new Address(privateKey, { prefix: 'ckb' })
     const testaddr = new Address(privateKey, { prefix: 'ckt' }) // the ckt is the signal for testnet
 
     this.setState({ privateKey: '0x'+testaddr.getPrivateKey(), mainnetaddress: mainaddr.value, testnetaddress: testaddr.value })
-  }
-
-  onGenAddress = () => {
-    this.genAddress()
   }
 
   render() {
