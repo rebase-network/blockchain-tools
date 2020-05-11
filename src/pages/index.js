@@ -22,6 +22,12 @@ class BlogIndex extends React.Component {
           <Link style={{ boxShadow: `none` }} to={'/ckb'}>
             CKB private key and address generator
           </Link>
+          <br/>
+          <br/>
+
+          <Link style={{ boxShadow: `none` }} to={'/decode'}>
+            Decode Address to Blake160 and LockHash
+          </Link>          
         </h3>
 
         {/* {posts.map(({ node }) => {
