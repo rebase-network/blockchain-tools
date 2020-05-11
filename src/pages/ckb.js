@@ -1,3 +1,6 @@
+import { ec as EC } from 'elliptic'
+import * as ckbUtils from '@nervosnetwork/ckb-sdk-utils'
+
 import React from "react"
 import { graphql } from "gatsby"
 
@@ -5,8 +8,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 
-import Address from '@nervosnetwork/ckb-sdk-address'
-import { ec as EC } from 'elliptic'
+const MainNetCodeHash = '0x9bd7e06f3ecf4be0f2fcd2188b23f1b9fcc88e5d4b65a8637b17723bbda3cce8'
 
 const ec = new EC('secp256k1')
 
@@ -18,19 +20,48 @@ class BlogIndex extends React.Component {
   }
 
   onGenAddress = () => {
-    const privateKey = ec.genKeyPair().priv
-    // privateKey need to be BN
-    const mainaddr = new Address(privateKey, { prefix: 'ckb' })
-    const testaddr = new Address(privateKey, { prefix: 'ckt' }) // the ckt is the signal for testnet
 
-    this.setState({ privateKey: '0x'+testaddr.getPrivateKey(), mainnetaddress: mainaddr.value, testnetaddress: testaddr.value })
+    const mainnetOpts = {
+      prefix: 'ckb',
+      type: '0x01',
+      codeHashOrCodeHashIndex: '0x00',
+    }
+    
+    const testnetOpts = {
+      prefix: 'ckt',
+      type: '0x01',
+      codeHashOrCodeHashIndex: '0x00',
+    }
+
+    const privateKey = "0x" + ec.genKeyPair().priv.toString('hex')
+    // privateKey need to be BN
+    const pubKey = ckbUtils.privateKeyToPublicKey(privateKey)
+    const blake160 = "0x" + ckbUtils.blake160(pubKey, "hex")
+    const lockHash = ckbUtils.scriptToHash({
+      hashType: "type",
+      codeHash: MainNetCodeHash,
+      args: blake160,
+    })
+    
+    const mainAddr = ckbUtils.privateKeyToAddress(privateKey, mainnetOpts)
+    const testAddr = ckbUtils.privateKeyToAddress(privateKey, testnetOpts)
+    
+    this.setState({
+      privateKey,
+      pubKey,
+      blake160,
+      lockHash,
+      mainnetaddress: mainAddr,
+      testnetaddress: testAddr,
+    })
+
   }
 
   render() {
     if (!this.state) return null
     const { data } = this.props
     const siteTitle = data.site.siteMetadata.title
-    const { privateKey, mainnetaddress, testnetaddress } = this.state
+    const { privateKey, pubKey, blake160, lockHash, mainnetaddress, testnetaddress } = this.state
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
@@ -58,11 +89,20 @@ class BlogIndex extends React.Component {
         <div><strong>私钥(privateKey)</strong>: {privateKey}</div>
         <br/>
 
-        <div><strong>主网地址(mainnetAddress)</strong>: {mainnetaddress}</div>
+        <div><strong>公钥(publicKey)</strong>: {pubKey}</div>
         <br/>
 
+        <div><strong>blake160</strong>: {blake160}</div>
+        <br/>
+
+        <div><strong>lockHash</strong>: {lockHash}</div>
+        <br/>
+        
         <div><strong>测试网地址(testnetAddress)</strong>: {testnetaddress}</div>
         <br/>
+
+        <div><strong>主网地址(mainnetAddress)</strong>: {mainnetaddress}</div>
+        <br/>        
       </Layout>
     )
   }
